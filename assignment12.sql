@@ -24,9 +24,6 @@ CREATE TABLE Orders (
     REFERENCES Customer(customer_id)
 );
 
-
-
-
 -- Represents the relationship between orders and pizzas with quantity information.
 CREATE TABLE OrdersPizza (
 	order_pizza_id int NOT NULL PRIMARY KEY,
@@ -126,7 +123,6 @@ FROM
 GROUP BY 
     c.customer_name, 
     order_date;
-
 
 -- IGNORE: Practice queries:
 -- Select out the order number and when you get results, add on the specific pizza type to get the amount of that:
