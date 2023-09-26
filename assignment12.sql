@@ -110,12 +110,18 @@ GROUP BY Customer.customer_name;
 -- It joins the Orders, OrderPizza, Pizza, and Customer tables to retrieve the necessary information.
 -- The total revenue is calculated by summing the product of pizza prices and order quantities (amount) for each customer and order date.
 -- The result is a list of customer names, order dates, and their respective total revenues.
-SELECT Customer.customer_name, Orders.order_date, SUM(Pizza.pizza_price * OrderPizza.amount) AS TotalRevenue
-FROM Orders
-JOIN OrderPizza ON Orders.order_id = OrderPizza.order_id
-JOIN Pizza ON OrderPizza.pizza_id = Pizza.pizza_id
-JOIN Customer ON Orders.customer_id = Customer.customer_id
-GROUP BY Customer.customer_name, Orders.order_date;
+SELECT 
+    c.customer_name, 
+    DATE(o.order_date) AS order_date, 
+    SUM(p.pizza_price * op.amount) AS total_revenue
+FROM 
+    Orders o
+    JOIN OrdersPizza op ON o.order_id = op.order_id
+    JOIN Pizza p ON op.pizza_id = p.pizza_id
+    JOIN Customer c ON o.customer_id = c.customer_id
+GROUP BY 
+    c.customer_name, 
+    order_date;
 
 
 -- IGNORE: Practice queries:
